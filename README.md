@@ -1,2 +1,2 @@
-This Repository includes programs of all types and thier own dynamic and static libraries.
+This Repository includes programs of Arrays, Digits, Numbers, Strings, Data structures, etc., and their own dynamic and static libraries in Windows and Linux OS.
 
