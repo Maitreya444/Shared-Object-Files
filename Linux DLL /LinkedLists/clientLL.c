@@ -6,6 +6,7 @@ int main()
 {
     void * ptr = NULL;
     void (*aptr)();
+    void (*bptr)();
 
     ptr = dlopen("/home/maitreya/Desktop/LSP/SharedLibrary/library3.so", RTLD_LAZY);
     if(ptr == NULL)
@@ -21,5 +22,13 @@ int main()
         return -1;
     }
 
+    bptr = dlsym(ptr, "UserInputDLL");
+    if(bptr == NULL)
+    {
+        printf("Unable to load the address of function bptr \n");
+        return -1;
+    }
+
     aptr();
+    bptr();
 }
