@@ -206,6 +206,7 @@ void UserInputSLL()
     PNODE First = NULL;
     int iRet = 0;
 
+    printf("--------------------------------Singly Linear Linked List--------------------------------\n");
     InsertFirstSLL(&First, 151);
     InsertFirstSLL(&First, 121);
     InsertFirstSLL(&First, 101);
@@ -240,5 +241,264 @@ void UserInputSLL()
     DisplaySLL(First);
     iRet = CountSLL(First);
     printf("Count of nodes in SLL is : %d\n", iRet);
+    iRet = 0;
 
+}
+
+void InsertFirstDLL(PPNODEDLL Head, int iNo)
+{
+    PNODEDLL newn = NULL;
+
+    newn = (PNODEDLL)malloc(sizeof (NODEDLL));
+
+    newn -> data = iNo;
+    newn -> next = NULL;
+    newn -> prev = NULL;
+
+    if(*Head == NULL)
+    {
+        *Head = newn;
+    }
+    
+    else
+    {
+        (*Head) -> prev = newn;
+        newn -> next = *Head;
+        *Head = newn;
+    }
+}
+
+void InsertLastDLL(PPNODEDLL Head, int iNo)
+{
+    PNODEDLL newn = NULL;
+    PNODEDLL temp = *Head;
+
+    newn = (PNODEDLL)malloc(sizeof (NODEDLL));
+
+    newn -> data = iNo;
+    newn -> next = NULL;
+    newn -> prev = NULL;
+
+    if(*Head == NULL)
+    {
+        *Head = newn;
+    }
+
+    else
+    {
+        while(temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newn;
+        newn -> prev = temp;
+        newn -> next = NULL;
+    }
+}
+
+void DeleteFirstDLL(PPNODEDLL Head)
+{
+    if(*Head == NULL)
+    {
+        return;
+    }
+
+    else if ((*Head) -> next == NULL)
+    {
+        free(*Head);
+        *Head = NULL;
+    }
+
+    else
+    {
+        (*Head) = (*Head) -> next;
+        free((*Head) -> prev);
+        (*Head) -> prev = NULL;
+    }
+}
+
+void DeleteLastDLL(PPNODEDLL Head)
+{
+    PNODEDLL temp = *Head;
+
+    if(*Head == NULL)
+    {
+        return;
+    }
+
+    else if ((*Head) -> next == NULL)
+    {
+        free(*Head);
+        *Head = NULL;
+    }
+
+    else
+    {
+        while(temp -> next -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = temp -> next -> next;
+        free(temp -> next);
+        temp -> next = NULL;
+    }
+}
+
+void DisplayDLL(PNODEDLL Head)
+{
+    while(Head != NULL)
+    {
+        printf("|%d | <=> ", Head -> data);
+        Head = Head -> next;
+    }
+    printf("NULL \n");
+}
+
+int CountDLL(PNODEDLL Head)
+{
+    int iCount = 0;
+
+    while(Head != NULL)
+    {
+        iCount++;
+        Head =Head -> next;
+    }
+    return iCount;
+}
+
+void InsertAtPosDLL(PPNODEDLL Head, int iNo, int iPos)
+{
+    int iLength = 0;
+    int iCnt = 0;
+
+    PNODEDLL newn = NULL;
+    PNODEDLL temp = *Head;
+
+    newn = (PNODEDLL)malloc(sizeof (NODEDLL));
+
+    iLength = CountDLL(*Head);
+
+    if((iPos < 1) || (iPos > iLength +1))
+    {
+        printf("Invalid Position \n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        InsertFirstDLL(Head, iNo);
+    }
+
+    else if (iPos == iLength+1)
+    {
+        InsertLastDLL(Head, iNo);
+    }
+
+    else
+    {
+        for(iCnt = 1; iCnt < iPos -1; iCnt++)
+        {
+            temp = temp -> next;
+        }
+
+        newn -> data= iNo;
+        newn -> next = NULL;
+        newn -> prev = NULL;
+
+        newn -> next = temp -> next;
+        temp -> next = newn;
+        newn -> prev = temp;
+    }
+}
+
+void DeleteAtPosDLL(PPNODEDLL Head, int iPos)
+{
+    int iLength = 0;
+    iLength = CountDLL(*Head);
+    int iCnt = 0;
+    PNODEDLL temp = *Head;
+    PNODEDLL tempX = NULL;
+
+    if((iPos < 1) || (iPos > iLength))
+    {
+        printf("Invalid Position \n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        DeleteFirstDLL(Head);
+        return;
+    }
+
+    else if (iPos == iLength)
+    {
+        DeleteLastDLL(Head);
+        return;
+    }
+
+    else
+    {
+        for(iCnt = 1; iCnt < iPos - 1; iCnt++)
+        {
+            temp = temp->next; 
+        }
+
+        // Storing the node to be deleted
+        tempX = temp->next;
+
+        // Updating the next and prev pointers
+        temp->next = tempX->next;  // Linking to the node after the one being deleted
+
+        if (tempX->next != NULL)   // If it's not the last node
+        {
+            tempX->next->prev = temp;  // Updating the prev pointer of the next node
+        }
+
+        free(tempX);
+    }
+}
+
+
+void UserInputDLL()
+{   
+    PNODEDLL First = NULL;
+    int bRet = 0;
+    printf("--------------------------------Doubly Linear Linked List--------------------------------\n");
+
+    InsertFirstDLL(&First, 121);
+    InsertFirstDLL(&First, 111);
+    InsertFirstDLL(&First, 101);
+    InsertFirstDLL(&First, 51);
+    InsertFirstDLL(&First, 21);
+    InsertFirstDLL(&First, 11);
+
+    DisplayDLL(First);
+    bRet = CountDLL(First);
+    printf("Count of nodes in DLL is : %d\n", bRet);
+
+    InsertLastDLL(&First, 201);
+    DisplayDLL(First);
+    bRet = CountDLL(First);
+    printf("Count of nodes in DLL is : %d\n", bRet);
+
+    DeleteFirstDLL(&First);
+    DisplayDLL(First);
+    bRet = CountDLL(First);
+    printf("Count of nodes in DLL is : %d\n", bRet);
+
+    DeleteLastDLL(&First);
+    DisplayDLL(First);
+    bRet = CountDLL(First);
+    printf("Count of nodes in DLL is : %d\n", bRet);
+
+    InsertAtPosDLL(&First, 69, 3);
+    DisplayDLL(First);
+    bRet = CountDLL(First);
+    printf("Count of nodes in DLL is : %d\n", bRet);
+
+    DeleteAtPosDLL(&First, 3);
+    DisplayDLL(First);
+    bRet = CountDLL(First);
+    printf("Count of nodes in DLL is : %d\n", bRet);
 }
