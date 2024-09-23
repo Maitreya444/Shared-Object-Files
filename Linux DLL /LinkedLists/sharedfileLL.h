@@ -33,3 +33,19 @@ void DisplayDLL(PNODEDLL Head);
 int CountDLL(PNODEDLL Head);
 void InsertAtPosDLL(PPNODEDLL Head, int iNo, int iPos);
 void DeleteAtPosDLL(PPNODEDLL Head, int iPos);
+
+typedef struct nodescll
+{
+    int data;
+    struct nodescll * next;
+}NODESCLL, *PNODESCLL, **PPNODESCLL;
+
+void UserInputSCLL();
+void InsertFirstSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo);
+void InsertLastSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo);
+void DeleteFirstSCLL(PPNODESCLL Head, PPNODESCLL Tail);
+void DeleteLastSCLL(PPNODESCLL Head, PPNODESCLL Tail);
+void DisplaySCLL(PNODESCLL Head, PNODESCLL Tail);
+int CountSCLL(PNODESCLL Head, PNODESCLL Tail);
+void InsertAtPosSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo, int iPos);
+void DeleteAtPosSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iPos);
