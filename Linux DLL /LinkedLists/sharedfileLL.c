@@ -502,3 +502,258 @@ void UserInputDLL()
     bRet = CountDLL(First);
     printf("Count of nodes in DLL is : %d\n", bRet);
 }
+
+
+void InsertFirstSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo)
+{
+    PNODESCLL newn = NULL;
+
+    newn = (PNODESCLL)malloc(sizeof (NODESCLL));
+    newn -> data = iNo;
+    newn -> next = NULL;
+
+    if(*Head == NULL && *Tail == NULL)
+    {
+        *Head = newn;
+        *Tail = newn;
+    }
+
+    else
+    {
+        newn -> next = *Head;
+        *Head = newn;
+    }
+    (*Tail) -> next = *Head;
+}
+
+void InsertLastSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo)
+{
+    PNODESCLL newn = NULL;
+
+    newn = (PNODESCLL)malloc(sizeof (NODESCLL));
+    newn -> data = iNo;
+    newn -> next = NULL;
+
+    if(*Head == NULL && *Tail == NULL)
+    {
+        *Head = newn;
+        *Tail = newn;
+    }
+
+    else
+    {
+        (*Tail) -> next = newn;
+        (*Tail) = (*Tail) -> next;
+    }
+    (*Tail) -> next = *Head;
+}
+
+void DeleteFirstSCLL(PPNODESCLL Head, PPNODESCLL Tail)
+{
+    if(*Head == NULL && *Tail == NULL)
+    {
+        return;
+    }
+
+    else if((*Head) -> next == NULL && (*Tail) -> next == NULL)
+    {
+        free(*Head);
+        *Head = NULL;
+        *Tail = NULL;
+    }
+    else
+    {
+        (*Head) = (*Head) -> next;
+        free((*Tail) -> next);
+        (*Tail) -> next = *Head;
+    }
+}
+
+void DeleteLastSCLL(PPNODESCLL Head, PPNODESCLL Tail)
+{   
+    PNODESCLL temp = *Head;
+
+    if(*Head == NULL && *Tail == NULL)
+    {
+        return;
+    }
+
+    else if((*Head) -> next == NULL && (*Tail) -> next == NULL)
+    {
+        free(*Head);
+        *Head = NULL;
+        *Tail = NULL;
+    }
+
+    else
+    {
+        while(temp -> next != (*Tail))
+        {
+            temp = temp -> next;
+        }
+        free(*Tail);
+        (*Tail) = temp;
+        (*Tail) -> next = *Head;
+    }
+}
+
+void DisplaySCLL(PNODESCLL Head, PNODESCLL Tail)
+{   
+    if(Head != NULL && Tail != NULL)
+    {
+        do
+        {
+            printf("|%d | -> ", Head -> data);
+            Head = Head -> next;
+        } 
+        while (Head != Tail -> next);
+        printf("\n");
+    }
+
+    else
+    {
+        printf("Linked List is empty \n");
+    }
+}
+
+int CountSCLL(PNODESCLL Head, PNODESCLL Tail)
+{
+    int iCount = 0;
+
+    if(Head != NULL && Tail != NULL)
+    {
+        do
+        {
+            iCount++;
+            Head = Head -> next;
+        } while (Head != Tail -> next);
+        return iCount;
+    }
+
+    else
+    {
+        return 0;
+    }
+}
+
+void InsertAtPosSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo, int iPos)
+{
+    int iLength = 0;
+    int iCnt = 0;
+    iLength = CountSCLL(*Head, *Tail);
+
+    PNODESCLL newn = NULL;
+    PNODESCLL temp = *Head;
+
+    if((iPos < 1) && (iPos > iLength +1))
+    {
+        printf("Invalid Position \n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        InsertFirstSCLL(Head, Tail, iNo);
+    }
+    
+    else if(iPos == iLength +1)
+    {
+        InsertLastSCLL(Head, Tail, iNo);
+    }
+    
+    else
+    {
+        for(iCnt = 1; iCnt < iPos -1; iCnt++)
+        {
+            temp = temp -> next;
+        }
+        
+        newn = (PNODESCLL)malloc(sizeof (NODESCLL));
+        newn -> data = iNo;
+        newn -> next = NULL;
+
+        newn -> next = temp -> next -> next;
+        temp -> next = newn;
+    }
+}
+
+void DeleteAtPosSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iPos)
+{
+    int iLength = 0;
+    int iCnt = 0;
+    iLength = CountSCLL(*Head, *Tail);
+
+    PNODESCLL temp = *Head;
+    PNODESCLL tempX = NULL;
+
+    if((iPos < 1) && (iPos > iLength))
+    {
+        printf("Invalid Position \n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        DeleteFirstSCLL(Head, Tail);
+    }
+    
+    else if(iPos == iLength)
+    {
+        DeleteLastSCLL(Head, Tail);
+    }
+
+    else
+    {
+        for(iCnt = 1; iCnt < iPos -1; iCnt++)
+        {
+            temp = temp -> next;
+        }
+        tempX = temp -> next;
+        temp -> next = temp -> next -> next;
+        free(tempX);
+    }
+}
+
+void UserInputSCLL()
+{
+    PNODESCLL First = NULL;
+    PNODESCLL Last = NULL;
+    int iRet = 0;
+
+    printf("--------------------------------Singly Circular Linked List--------------------------------\n");
+
+    InsertFirstSCLL(&First, &Last, 151);
+    InsertFirstSCLL(&First, &Last, 121);
+    InsertFirstSCLL(&First, &Last, 101);
+    InsertFirstSCLL(&First, &Last, 51);
+    InsertFirstSCLL(&First, &Last, 21);
+    InsertFirstSCLL(&First, &Last, 11);
+    DisplaySCLL(First, Last);
+    iRet = CountSCLL(First, Last);
+    printf("Count of nodes in SCLL is : %d\n", iRet);
+
+    InsertLastSCLL(&First, &Last, 201);
+    DisplaySCLL(First, Last);
+    iRet = CountSCLL(First, Last);
+    printf("Count of nodes in SCLL is : %d\n", iRet);
+
+    DeleteFirstSCLL(&First, &Last);
+    DisplaySCLL(First, Last);
+    iRet = CountSCLL(First, Last);
+    printf("Count of nodes in SCLL is : %d\n", iRet);
+
+    DeleteLastSCLL(&First, &Last);
+    DisplaySCLL(First, Last);
+    iRet = CountSCLL(First, Last);
+    printf("Count of nodes in SCLL is : %d\n", iRet);
+
+    InsertAtPosSCLL(&First, &Last, 69, 3);
+    DisplaySCLL(First, Last);
+    iRet = CountSCLL(First, Last);
+    printf("Count of nodes in SCLL is : %d\n", iRet);
+
+    DeleteAtPosSCLL(&First, &Last, 3);
+    DisplaySCLL(First, Last);
+    iRet = CountSCLL(First, Last);
+    printf("Count of nodes in SCLL is : %d\n", iRet);
+}
