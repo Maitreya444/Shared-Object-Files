@@ -49,3 +49,20 @@ void DisplaySCLL(PNODESCLL Head, PNODESCLL Tail);
 int CountSCLL(PNODESCLL Head, PNODESCLL Tail);
 void InsertAtPosSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iNo, int iPos);
 void DeleteAtPosSCLL(PPNODESCLL Head, PPNODESCLL Tail, int iPos);
+
+typedef struct nodedcll
+{
+    int data;
+    struct nodedcll * next;
+    struct nodedcll * prev;
+}NODEDCLL, *PNODEDCLL, **PPNODEDCLL;
+
+void UserInputDCLL();
+void InsertFirstDCLL(PPNODEDCLL Head, PPNODEDCLL Tail, int iNo);
+void InsertLastDCLL(PPNODEDCLL Head, PPNODEDCLL Tail, int iNo);
+void DeleteFirstDCLL(PPNODEDCLL Head, PPNODEDCLL Tail);
+void DeleteLastDCLL(PPNODEDCLL Head, PPNODEDCLL Tail);
+void DisplayDCLL(PNODEDCLL Head, PNODEDCLL Tail);
+int CountDCLL(PNODEDCLL Head, PNODEDCLL Tail);
+void InsertAtPosDCLL(PPNODEDCLL Head, PPNODEDCLL Tail, int iNo, int iPos);
+void DeleteAtPosDCLL(PPNODEDCLL Head, PPNODEDCLL Tail, int iPos);
