@@ -9,6 +9,7 @@ int main()
     void (*bptr)();
     void (*cptr)();
     void (*dptr)();
+    void (*eptr)();
 
     ptr = dlopen("/home/maitreya/Desktop/LSP/SharedLibrary/library3.so", RTLD_LAZY);
     if(ptr == NULL)
@@ -45,8 +46,16 @@ int main()
         return -1;
     }
 
+    eptr = dlsym(ptr, "AssignmentInput");
+    if(eptr == NULL)
+    {
+        printf("Unable to load the address of function eptr \n");
+        return -1;
+    }
+
     aptr();
     bptr();
     cptr();
     dptr();
+    eptr();
 }
