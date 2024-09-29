@@ -1,5 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+#define TRUE 1
+#define FALSE 0
+typedef int BOOL;
 
 typedef struct node
 {
@@ -66,3 +69,17 @@ void DisplayDCLL(PNODEDCLL Head, PNODEDCLL Tail);
 int CountDCLL(PNODEDCLL Head, PNODEDCLL Tail);
 void InsertAtPosDCLL(PPNODEDCLL Head, PPNODEDCLL Tail, int iNo, int iPos);
 void DeleteAtPosDCLL(PPNODEDCLL Head, PPNODEDCLL Tail, int iPos);
+
+typedef struct nodeha
+{
+    int data;
+    struct nodeha * next;
+}NODEHA, *PNODEHA, **PPNODEHA;
+
+void AssignmentInput();
+void DisplayHA(PNODEHA Head);
+int SearchFirstOcc(PNODEHA Head, int No);
+int SearchLastOcc(PNODEHA Head, int No);
+int Addition(PNODEHA Head);
+int Maximum(PNODEHA Head);
+int Minimum(PNODEHA Head);
