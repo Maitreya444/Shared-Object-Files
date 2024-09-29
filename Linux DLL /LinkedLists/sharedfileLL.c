@@ -1031,3 +1031,175 @@ void UserInputDCLL()
     printf("Count of nodes in DCL is : %d\n", iRet);
 
 }
+
+void InsertFirstHA(PPNODEHA Head, int iNo)
+{
+    PNODEHA newn = NULL;
+
+    newn = (PNODEHA)malloc(sizeof (NODEHA));
+
+    newn -> data = iNo;
+    newn -> next = NULL;
+
+    if(*Head == NULL)
+    {
+        *Head = newn;
+    }
+
+    else
+    {
+        newn -> next = *Head;
+        *Head = newn;
+    }
+}
+
+int SearchFirstOcc(PNODEHA Head, int No)
+{
+    int iCnt = 0;
+
+    while(Head != NULL)
+    {
+        if(Head -> data == No)
+        {   
+            iCnt++;
+            return iCnt;
+        }   
+        iCnt++;
+        Head = Head -> next;
+    }
+    return FALSE;
+}
+
+int SearchLastOcc(PNODEHA Head, int No)
+{
+    int iCnt = 0;
+    int iNo = iCnt;
+
+    while(Head != NULL)
+    {
+        if(Head -> data == No)
+        {      
+            iCnt++;
+            iNo = iCnt;
+            Head = Head -> next; 
+        }
+        iCnt++;
+        Head = Head -> next;
+    }
+    return iNo;
+} 
+
+int Addition(PNODEHA Head)
+{   
+    int Add = 0;
+    int iNo = 0;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+        Add = Add + iNo;
+        Head = Head -> next;
+    }
+
+    return Add;
+}
+
+int Maximum(PNODEHA Head)
+{
+    int iMax = 0;
+
+    while(Head != NULL)
+    {   
+        Head -> data;
+        if(iMax < Head -> data)
+        {
+            iMax = Head -> data;
+        }
+        Head = Head -> next;
+    }
+    return iMax;
+}
+
+int Minimum(PNODEHA Head)
+{   
+    int iMin = Head -> data;
+
+    while(Head != NULL)
+    {   
+        if(Head -> data < iMin)
+        {
+            iMin = Head -> data;
+        }
+        Head = Head -> next;
+    }
+    return iMin;
+}
+
+void DisplayHA(PNODEHA Head)
+{
+    while(Head != NULL)
+    {
+        printf("|%d | -> ", Head -> data);
+        Head = Head -> next;
+    }
+    printf("NULL \n");
+}
+
+void AssignmentInput()
+{
+    printf("--------------------------------Assignment Linked List--------------------------------\n");
+
+    PNODEHA First = NULL;
+    int iRet = 0;
+    int iValue1 = 0;
+    
+    InsertFirstHA(&First, 70);
+    InsertFirstHA(&First, 60);
+    InsertFirstHA(&First, 40);
+    InsertFirstHA(&First, 100);
+    InsertFirstHA(&First, 50);
+    InsertFirstHA(&First, 40);
+    InsertFirstHA(&First, 30);
+    InsertFirstHA(&First, 20);
+    InsertFirstHA(&First, 10);
+
+    DisplayHA(First);
+    printf("Enter the element which you want to search \n");
+    scanf("%d", &iValue1);
+    iRet = SearchFirstOcc(First, iValue1); 
+    if(iRet == FALSE)
+    {
+        printf("Element not found \n");
+    }
+    else
+    {
+        printf("First Element is occured at : %d\n", iRet);
+    }
+
+    iRet = 0;
+    iValue1 = 0;
+
+    printf("Enter the element which you want to search \n");
+    scanf("%d", &iValue1);
+    iRet = SearchLastOcc(First, iValue1); 
+    if(iRet == 0)
+    {
+        printf("Element not found \n");
+    }
+    else
+    {
+        printf("Last Element is occured at : %d\n", iRet);
+    }
+
+    iRet = 0;
+    iRet = Addition(First);
+    printf("Addition of linkedlist elements is : %d\n", iRet);
+
+    iRet = 0;
+    iRet = Maximum(First);
+    printf("Maximum element in the linked list is : %d\n", iRet);
+
+    iRet = 0;
+    iRet = Minimum(First);
+    printf("Minimum element in the linked list is : %d\n", iRet);
+}
