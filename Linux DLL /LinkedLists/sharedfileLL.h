@@ -83,3 +83,7 @@ int SearchLastOcc(PNODEHA Head, int No);
 int Addition(PNODEHA Head);
 int Maximum(PNODEHA Head);
 int Minimum(PNODEHA Head);
+void Perfect(PNODEHA Head);
+void Prime(PNODEHA Head);
+int EvenAddition(PNODEHA Head);
+int SecondMax(PNODEHA Head);
