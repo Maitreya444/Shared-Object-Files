@@ -1135,6 +1135,124 @@ int Minimum(PNODEHA Head)
     return iMin;
 }
 
+void Perfect(PNODEHA Head)
+{
+    int iCnt = 0;
+    int iSum = 0;
+    int iNo = 0;
+
+    printf("Perfect Number is : ");
+
+    while(Head != NULL)
+    {   
+        iNo = Head -> data;
+        iSum = 0;
+
+        for(iCnt = 1; iCnt <= iNo /2; iCnt++)
+        {
+            if(iNo % iCnt == 0)
+            {
+                iSum = iSum + iCnt;
+            }
+        }
+
+        if(iSum == iNo && iNo != 0)
+        {
+            printf("%d ", iNo);
+        }
+        Head = Head->next;
+    }
+    printf("\n");
+}
+
+void Prime(PNODEHA Head)
+{
+    int iCnt = 0;
+    int iNo = 0;
+    int iPrime = 0;
+
+    printf("Prime numbers are : ");
+
+    while (Head != NULL)
+    {
+        iNo = Head->data;
+        iPrime = 1;  
+
+        if (iNo < 2)
+        {
+            iPrime = 0;  // Numbers less than 2 are not prime
+        }
+        else
+        {
+            // Check divisibility from 2 to sqrt(iNo)
+            for (iCnt = 2; iCnt * iCnt <= iNo; iCnt++)
+            {
+                if (iNo % iCnt == 0)
+                {
+                    iPrime = 0;  // Not prime
+                    break;
+                }
+            }
+        }
+
+        if (iPrime)
+        {
+            printf("%d ,", iNo);  
+        }
+
+        Head = Head->next;
+    }
+    printf("\n");
+}
+
+int EvenAddition(PNODEHA Head)
+{
+    int iNo = 0;
+    int iAdd = 0;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+
+        if(iNo %2 ==0)
+        {
+            iAdd = iNo + iAdd;
+        }
+
+        Head = Head -> next;
+    }
+
+    return iAdd;
+}
+
+int SecondMax(PNODEHA Head)
+{
+    {
+    int iNo = 0;
+    int iMax1 = 0;
+    int iMax2 = 0;
+    int iCnt = 0;
+
+    while(Head != NULL)
+    {
+        iMax1 = Head->data;
+        iMax2 = Head -> data;
+
+            if(( Head -> data > iMax1))
+            {   
+                iMax2 = iMax1;
+                iMax1 = Head -> data;
+            }
+            else if(Head -> data > iMax2 && Head -> data < iMax1)
+            {
+                iMax2 = Head -> data;
+            }
+        Head = Head -> next;
+    }
+    return iMax2;
+    }
+}
+
 void DisplayHA(PNODEHA Head)
 {
     while(Head != NULL)
@@ -1158,10 +1276,13 @@ void AssignmentInput()
     InsertFirstHA(&First, 40);
     InsertFirstHA(&First, 100);
     InsertFirstHA(&First, 50);
+    InsertFirstHA(&First, 28);
     InsertFirstHA(&First, 40);
     InsertFirstHA(&First, 30);
+    InsertFirstHA(&First, 7);
     InsertFirstHA(&First, 20);
     InsertFirstHA(&First, 10);
+    InsertFirstHA(&First, 6);
 
     DisplayHA(First);
     printf("Enter the element which you want to search \n");
@@ -1202,4 +1323,15 @@ void AssignmentInput()
     iRet = 0;
     iRet = Minimum(First);
     printf("Minimum element in the linked list is : %d\n", iRet);
+
+    Perfect(First);
+    Prime(First);
+
+    iRet = 0;
+    iRet = EvenAddition(First);
+    printf("Even addition of Even elements is : %d\n", iRet);
+
+    iRet = 0;
+    iRet = SecondMax(First);
+    printf("Second Maximum Element is : %d\n", iRet);
 }
