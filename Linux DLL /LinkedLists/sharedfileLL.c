@@ -1227,7 +1227,6 @@ int EvenAddition(PNODEHA Head)
 
 int SecondMax(PNODEHA Head)
 {
-    {
     int iNo = 0;
     int iMax1 = 0;
     int iMax2 = 0;
@@ -1235,22 +1234,167 @@ int SecondMax(PNODEHA Head)
 
     while(Head != NULL)
     {
-        iMax1 = Head->data;
-        iMax2 = Head -> data;
-
-            if(( Head -> data > iMax1))
-            {   
-                iMax2 = iMax1;
-                iMax1 = Head -> data;
-            }
-            else if(Head -> data > iMax2 && Head -> data < iMax1)
-            {
-                iMax2 = Head -> data;
-            }
+        if(( Head -> data > iMax1))
+        {   
+            iMax2 = iMax1;
+            iMax1 = Head -> data;
+        }
+        else if(Head -> data > iMax2 && Head -> data < iMax1)
+        {
+            iMax2 = Head -> data;
+        }
         Head = Head -> next;
     }
     return iMax2;
+}
+
+void SumDigit(PNODEHA Head)
+{
+    int iNo = 0;
+    int iDigit = 0;
+    int iSum = 0;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+
+        while(iNo !=0)
+        {
+            iDigit = iNo % 10;
+            iSum = iSum + iDigit;
+            iNo = iNo / 10;
+        }
+        printf("%d ", iSum);
+        iSum = 0;
+        Head = Head -> next;
     }
+    printf("\n");
+}
+
+void Revserse(PNODEHA Head)
+{
+    int iNo = 0;
+    int iDigit = 0;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+
+        while(iNo != 0)
+        {
+            iDigit = iNo % 10;
+            printf("%d", iDigit);
+            iNo = iNo / 10;
+        }
+        printf(" ");
+        Head = Head -> next;
+    }
+    printf("\n");
+}
+
+void Pallindrome(PNODEHA Head)
+{
+    int iDigit = 0;
+    int iReverse = 0;
+    int iNo = 0;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+
+        while(iNo != 0)
+        {
+            iDigit = iNo % 10;
+            iReverse = (iReverse * 10)+iDigit;
+            iNo = iNo / 10;
+        }
+
+        if(iReverse == Head -> data)
+        {
+            printf("%d ", iReverse);
+        }
+        iReverse = 0;
+        Head = Head -> next;
+    }
+    printf("\n");
+}
+
+void Product(PNODEHA Head)
+{
+    int iDigit = 0;
+    int iMult = 1;
+    int iNo = 0;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+
+        while(iNo != 0)
+        {
+            iDigit = iNo % 10;
+            if(iDigit != 0)
+            {
+                iMult = iMult * iDigit;
+            }
+            iNo = iNo / 10;
+        }
+        printf("%d ", iMult);
+        iMult = 1;
+        Head = Head -> next;
+    }
+    printf("\n");
+}
+
+void SmallDigit(PNODEHA Head)
+{
+    int iNo = 0;
+    int iDigit = 0;
+    int iSmall = 1;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+        iSmall = 9;
+        while(iNo != 0)
+        {
+            iDigit = iNo % 10;
+            if(iDigit < iSmall)
+            {
+                iSmall = iDigit;
+            }
+            iNo = iNo / 10;
+        }
+        printf("%d ", iSmall);
+        iSmall = 9;
+        Head = Head -> next;
+    }
+    printf("\n");
+}
+
+void LargeDigit(PNODEHA Head)
+{
+    int iNo = 0;
+    int iDigit = 0;
+    int iLarge = 1;
+
+    while(Head != NULL)
+    {
+        iNo = Head -> data;
+        iLarge = 0;
+        while(iNo != 0)
+        {
+            iDigit = iNo % 10;
+            if(iDigit > iLarge)
+            {
+                iLarge = iDigit;
+            }
+            iNo = iNo / 10;
+        }
+        printf("%d ", iLarge);
+        iLarge = 0;
+        Head = Head -> next;
+    }
+    printf("\n");
 }
 
 void DisplayHA(PNODEHA Head)
@@ -1271,6 +1415,7 @@ void AssignmentInput()
     int iRet = 0;
     int iValue1 = 0;
     
+    InsertFirstHA(&First, 71);
     InsertFirstHA(&First, 70);
     InsertFirstHA(&First, 60);
     InsertFirstHA(&First, 40);
@@ -1334,4 +1479,11 @@ void AssignmentInput()
     iRet = 0;
     iRet = SecondMax(First);
     printf("Second Maximum Element is : %d\n", iRet);
+
+    SumDigit(First);
+    Revserse(First);
+    Pallindrome(First);
+    Product(First);
+    SmallDigit(First);
+    LargeDigit(First);
 }
