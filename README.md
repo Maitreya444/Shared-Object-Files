@@ -6,4 +6,6 @@ Linux DLL compilation command :-
 3. gcc clientLL.c (name of client) -rdynamic -o Myexe
 4. ./Myexe
 
-
+Windows DLL compilation command :-
+1. gcc -shared -o sharedfile.dll sharedfile.c
+2. gcc -o Myexe client.c
