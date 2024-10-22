@@ -1,6 +1,6 @@
 This Repository includes programs of Arrays, Digits, Numbers, Strings, Data structures, etc., and their own dynamic and static libraries in Windows and Linux OS.
 
-#USAGE of shared library files :-
+# USAGE of shared library files :-
 1. For programs that require multiple libraries, shared libraries can reduce the memory footprint of the program. 
 2. This is because multiple program can use shared library simultaneously.
 3. Therefore only one library is needed in the memory at a time.
